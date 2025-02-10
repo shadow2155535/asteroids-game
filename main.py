@@ -41,13 +41,21 @@ def main():
         for entity in drawable:
             entity.draw(screen)
         
-        pygame.display.flip()
-        dt = (timer.tick(60))/1000
-
         for asteroid in asteroids:
             if player.collides(asteroid):
                 print("Game over!")
                 sys.exit()
+
+        for asteroid in asteroids:
+            for shot in shots:
+                if shot.collides(asteroid):
+                    shot.kill()
+                    asteroid.kill()
+
+        pygame.display.flip()
+        dt = (timer.tick(60))/1000
+
+        
 
 if __name__ == "__main__":
     main()
